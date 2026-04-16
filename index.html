@@ -12,13 +12,11 @@
     background: #0a0a14;
     color: #e8e8f0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
+    padding: 48px 24px;
     line-height: 1.6;
   }
-  .container { max-width: 720px; width: 100%; text-align: center; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .hero { text-align: center; margin-bottom: 56px; }
   .logo {
     width: 96px; height: 96px;
     margin: 0 auto 24px;
@@ -40,37 +38,113 @@
     background-clip: text;
     margin-bottom: 12px;
   }
+  h2 { font-size: 22px; margin-bottom: 16px; }
   .tag { font-size: 18px; opacity: 0.7; margin-bottom: 32px; }
-  .desc {
+  .card {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-    text-align: left;
+    padding: 28px;
+    margin-bottom: 20px;
   }
-  .links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .links a {
-    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  .connect-section { text-align: center; margin-bottom: 40px; }
+  .connect-btn {
+    background: linear-gradient(135deg, #fe2c55, #25f4ee);
     color: #fff;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .connect-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(254, 44, 85, 0.3); }
+  .connect-btn .icon { font-size: 20px; }
+  .status-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .status-pill.disconnected { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+  .status-pill.connected { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+  .scopes-list {
+    text-align: left;
+    margin-top: 16px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  .scopes-list li { margin-bottom: 4px; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .feature { font-size: 14px; }
+  .feature .feat-title { font-weight: 700; margin-bottom: 4px; color: #a78bfa; }
+  .links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 32px 0; }
+  .links a {
+    color: #a78bfa;
     text-decoration: none;
-    padding: 12px 24px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 10px;
     font-weight: 600;
-    transition: transform 0.15s ease;
+    transition: background 0.15s ease;
   }
-  .links a:hover { transform: translateY(-2px); }
-  .footer { margin-top: 48px; opacity: 0.4; font-size: 13px; }
+  .links a:hover { background: rgba(255,255,255,0.04); }
+  .footer { margin-top: 48px; opacity: 0.4; font-size: 13px; text-align: center; }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="logo">C</div>
-  <h1>CaughtLiveGG</h1>
-  <div class="tag">Viral Streaming Clips · Reactions · Daily Uploads</div>
 
-  <div class="desc">
-    <p>CaughtLiveGG curates the most notable moments from public Twitch and livestream content. Clips are re-formatted into short-form video with on-screen captions and posted to TikTok and YouTube Shorts with full attribution to the original streamer.</p>
+  <div class="hero">
+    <div class="logo">C</div>
+    <h1>CaughtLiveGG</h1>
+    <div class="tag">Viral Streaming Clips · Reactions · Daily Uploads</div>
+  </div>
+
+  <div class="card connect-section">
+    <div id="status-pill" class="status-pill disconnected">⦿ TikTok not connected</div>
+    <h2 style="margin-top:4px">Connect your TikTok account</h2>
+    <p style="opacity:0.7; max-width:520px; margin:12px auto 20px;">
+      Authorize CaughtLiveGG to upload processed clip drafts to your TikTok account. Drafts are uploaded to your TikTok inbox where you can review and publish them manually.
+    </p>
+
+    <button class="connect-btn" onclick="connectTikTok()">
+      <span class="icon">🎵</span>
+      <span>Connect TikTok</span>
+    </button>
+
+    <div class="scopes-list">
+      <strong style="font-size:13px; opacity:0.7; display:block; margin-top:20px; margin-bottom:8px;">SCOPES REQUESTED</strong>
+      <ul style="list-style:none; padding:0;">
+        <li><code style="background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:4px;">user.info.basic</code> — read your public profile name and avatar</li>
+        <li><code style="background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:4px;">video.upload</code> — upload videos to your TikTok inbox as drafts</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How it works</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feat-title">1. We curate public livestream content</div>
+        <div>Notable moments are identified from public Twitch streams.</div>
+      </div>
+      <div class="feature">
+        <div class="feat-title">2. AI formats the clip</div>
+        <div>Auto-captions, vertical crop, hook text, and attribution to the original streamer.</div>
+      </div>
+      <div class="feature">
+        <div class="feat-title">3. You approve + publish</div>
+        <div>Drafts land in your TikTok inbox. Review and publish on your schedule.</div>
+      </div>
+    </div>
   </div>
 
   <div class="links">
@@ -81,5 +155,31 @@
 
   <div class="footer">© 2026 CaughtLiveGG · contact via privacy policy</div>
 </div>
+
+<script>
+  const TIKTOK_CLIENT_KEY = "sbawiki4k6hb2j8bnz";
+  const REDIRECT_URI = "https://gamerhacker137.github.io/caughtlivegg/callback.html";
+  const SCOPES = "user.info.basic,video.upload";
+
+  // Check for existing connection state
+  const connected = localStorage.getItem("caughtlivegg_tiktok_connected");
+  if (connected) {
+    const pill = document.getElementById("status-pill");
+    pill.className = "status-pill connected";
+    pill.textContent = "✓ TikTok connected";
+  }
+
+  function connectTikTok() {
+    const state = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem("tiktok_oauth_state", state);
+    const url = "https://www.tiktok.com/v2/auth/authorize/" +
+      "?client_key=" + encodeURIComponent(TIKTOK_CLIENT_KEY) +
+      "&scope=" + encodeURIComponent(SCOPES) +
+      "&response_type=code" +
+      "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
+      "&state=" + encodeURIComponent(state);
+    window.location.href = url;
+  }
+</script>
 </body>
 </html>
