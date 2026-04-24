@@ -111,17 +111,12 @@
     try { localStorage.setItem("caughtlivegg_tiktok_connected", "1"); } catch(e) {}
 
     result.innerHTML = `
-      <div class="label">TikTok authorization successful</div>
-      <div class="code-box success" style="border: 1px solid rgba(16, 185, 129, 0.3);">
-        ✓ Your TikTok account is now connected to CaughtLiveGG.<br><br>
-        Authorization code: <span style="opacity:0.5">${code.slice(0, 20)}...</span><br><br>
-        The CaughtLiveGG backend has received this code and exchanged it for an access token.
-        You can now upload clip drafts to your TikTok inbox.
-      </div>
-      <button onclick="window.location.href='index.html'">Return to CaughtLiveGG</button>
-      <button onclick="copyCode(this)" style="margin-left:8px; background: rgba(255,255,255,0.06);">Copy Code (dev)</button>
+      <div class="label">Authorization code</div>
+      <div class="code-box" id="code">${code}</div>
+      <button onclick="copyCode(this)">Copy Code</button>
+      ${state ? '<div class="label" style="margin-top:16px">State</div><div class="code-box">' + state + '</div>' : ''}
     `;
-    status.innerHTML = '<span class="success">✓ Connection complete. Drafts can now be uploaded to your TikTok inbox.</span>';
+    status.innerHTML = '<span class="success">✓ Copy the code above and paste it into the setup script (you have ~60 seconds).</span>';
   } else {
     result.innerHTML = `
       <div class="code-box">No authorization code found in URL.</div>
